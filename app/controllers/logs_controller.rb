@@ -1,10 +1,10 @@
-class LogsController < ApplicationController
+class LogsController < ProtectedController
   before_action :set_log, only: [:show, :update, :destroy]
 
   # GET /logs
   # GET /logs.json
   def index
-    @logs = Log.all
+    @logs = current_user.logs
 
     render json: @logs
   end
@@ -18,7 +18,7 @@ class LogsController < ApplicationController
   # POST /logs
   # POST /logs.json
   def create
-    @log = Log.new(log_params)
+    @log = current_user.logs.build(log_params)
 
     if @log.save
       render json: @log, status: :created, location: @log
