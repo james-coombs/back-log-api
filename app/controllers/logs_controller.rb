@@ -42,9 +42,13 @@ class LogsController < ProtectedController
   # DELETE /logs/1
   # DELETE /logs/1.json
   def destroy
-    @log.destroy
-
-    head :no_content
+    if current_user.id == @log.user_id
+      @log.destroy
+      # current_user.logout
+      head :no_content
+    else
+      head :unauthorized
+    end
   end
 
   private
