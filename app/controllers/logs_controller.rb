@@ -49,11 +49,11 @@ class LogsController < ProtectedController
 
   private
 
-    def set_log
-      @log = Log.find(params[:id])
-    end
+  def set_log
+    @log = Log.find(params[:id])
+  end
 
-    def log_params
-      params.require(:log).permit(:title, :platform, :players, :stage, :notes)
-    end
+  def log_params
+    params.require(:log).permit(:title, :platform, :players, :stage, :notes)
+  end
 end
