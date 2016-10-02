@@ -12,7 +12,11 @@ class LogsController < ProtectedController
   # GET /logs/1
   # GET /logs/1.json
   def show
-    render json: @log
+    if current_user.id == @log.user_id
+      render json: @log
+    else
+      render json: @log.errors, status: :unprocessable_entity
+    end
   end
 
   # POST /logs
@@ -30,12 +34,13 @@ class LogsController < ProtectedController
   # PATCH/PUT /logs/1
   # PATCH/PUT /logs/1.json
   def update
-    @log = Log.find(params[:id])
-
-    if @log.update(log_params)
-      head :no_content
-    else
-      render json: @log.errors, status: :unprocessable_entity
+    if current_user.id == @log.user_id
+      @log = Log.find(params[:id])
+      if @log.update(log_params)
+        head :no_content
+      else
+        render json: @log.errors, status: :unprocessable_entity
+      end
     end
   end
 
@@ -44,7 +49,7 @@ class LogsController < ProtectedController
   def destroy
     if current_user.id == @log.user_id
       @log.destroy
-      # current_user.logout
+
       head :no_content
     else
       head :unauthorized
