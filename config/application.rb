@@ -41,7 +41,7 @@ module BackLogApi
     # Cross-Origin Resource Sharing
     config.middleware.use Rack::Cors do
       allow do
-        origins ENV['CLIENT_ORIGIN'] || 'https://james-coombs.github.io/back-log-client/'
+        origins ENV['CLIENT_ORIGIN'] || 'https://james-coombs.github.io'
         resource '*',
                  headers: :any,
                  methods: [:options, :get,
