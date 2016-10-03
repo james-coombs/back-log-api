@@ -4,9 +4,9 @@ curl --include --request POST https://back-log.herokuapp.com/sign-up \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
-      "email": "an@example2.email",
+      "email": "an@example2.email2",
       "password": "an example2 password2",
-      "password_confirmation": "an example password"
+      "password_confirmation": "an example2 password2"
     }
   }'
 
