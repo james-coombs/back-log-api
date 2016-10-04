@@ -41,7 +41,6 @@ class LogsController < ProtectedController
       else
         render json: @log.errors, status: :unprocessable_entity
       end
-
     end
   end
 
